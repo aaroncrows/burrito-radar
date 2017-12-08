@@ -1,6 +1,11 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 
+const plugins = [
+  new HtmlWebpackPlugin({ template: path.resolve(__dirname, '../src/index.html')})
+]
+
+
 module.exports = {
   entry: [path.resolve(__dirname, '../src/app.js')],
   output: {
@@ -12,12 +17,9 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: path.resolve(__dirname, '../src/app.js')
+        include: path.resolve(__dirname, '../src')
       }
     ]
   },
-
-  plugins: [
-    new HtmlWebpackPlugin({ template: path.resolve(__dirname, '../src/index.html')})
-  ]
+  plugins
 }
