@@ -1,0 +1,7 @@
+@import "~milligram/dist/milligram.css";
+
+:local(.root) {
+  &>h1 {
+    text-align: center;
+  }
+}

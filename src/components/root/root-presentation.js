@@ -1,13 +1,19 @@
 import React from 'react'
+import { root } from './root.scss'
 
 const RootPresentation = ({error, props}) => {
-  console.log('from query render', error, props)
+  let businessDiv = <h1>Loading</h1>
   if (error) {
-    return <div>{error.message}<br/>{JSON.stringify(error.source)}</div>;
+    businessDiv = <h1>{error.message}<br/>{JSON.stringify(error.source)}</h1>
   } else if (props) {
-    return <div>{props.business.name} is great!</div>;
+    businessDiv = <h1>{props.business.name} is great!</h1>
   }
-  return <div>Loading</div>;
+
+  return (
+    <div className={`container ${root}`}>
+      {businessDiv}
+    </div>
+  )
 }
 
 export default RootPresentation
