@@ -14,6 +14,8 @@ const Root = () => (<QueryRenderer
       business(id: "coava-coffee-roasters-portland-4") {
         ...BusinessCard
       }
+
+      ...BusinessList
     }
   `}
   render={RootPresentation}
