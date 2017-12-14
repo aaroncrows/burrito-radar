@@ -22,7 +22,7 @@ const fetchQuery = (operation, variables, cacheConfig, uploadables) =>
       'content-type': 'application/json'
     },
     body: JSON.stringify({
-      query: sfQuery,
+      query: operation.text,
       variables
     })
   }).then(r => r.json())
@@ -30,10 +30,8 @@ const fetchQuery = (operation, variables, cacheConfig, uploadables) =>
 const source = new RecordSource()
 const store = new Store(source)
 const network = Network.create(fetchQuery)
-const handlerProvider = null
 
 const environment = new Environment({
-  handlerProvider, // Can omit.
   network,
   store,
 })

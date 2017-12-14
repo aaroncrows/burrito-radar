@@ -11,8 +11,8 @@ const Root = () => (<QueryRenderer
   environment={environment}
   query={graphql`
     query rootQuery {
-      business {
-        name
+      business(id: "coava-coffee-roasters-portland-4") {
+        ...BusinessCard
       }
     }
   `}

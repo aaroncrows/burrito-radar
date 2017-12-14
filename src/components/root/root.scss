@@ -1,4 +1,8 @@
-@import "~milligram/dist/milligram.css";
+@import "~picnic/picnic.css";
+
+.container {
+  max-width: 100rem
+}
 
 :local(.root) {
   &>h1 {

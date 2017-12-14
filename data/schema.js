@@ -21,41 +21,33 @@ import {
   toGlobalId,
 } from 'graphql-relay';
 
-const {nodeInterface, nodeField} = nodeDefinitions(
-  (globalId) => {
-    const {type, id} = fromGlobalId(globalId);
-    if (type === 'Business') {
-      return {business: {name: 'from schema'}}
-    }
-
-    return null;
-  },
-  (obj) => {
-    if (obj instanceof Business) {
-      return Business
-    }
-    return null
-  }
-)
-
 const Business = new GraphQLObjectType({
   name: 'Business',
   fields: {
     id: globalIdField('Business'),
     name: {
       type: GraphQLString
+    },
+    url: {
+      type: GraphQLString
+    },
+    rating: {
+      type: GraphQLString
     }
-  },
-  interfaces: [nodeInterface]
+  }
 })
 
 
 const Query = new GraphQLObjectType({
   name: 'Query',
   fields: {
-    node: nodeField,
     business: {
-      type: Business
+      type: Business,
+      args: {
+        id: {
+          type: GraphQLString
+        }
+      }
     }
   }
 })
