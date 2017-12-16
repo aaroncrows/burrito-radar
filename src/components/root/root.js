@@ -11,25 +11,36 @@ class Root extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      term: 'Portland'
+      location: 'Portland'
     }
 
     this.updateSearch = this.updateSearch.bind(this)
   }
 
-  updateSearch(term) {
-    this.setState({ term })
+  updateSearch({ location, latitude, longitude }) {
+    this.setState({ location, latitude, longitude })
   }
 
   render() {
-    const { term } = this.state
+    const { location, latitude, longitude } = this.state
 
     return (
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query rootQuery($term: String) {
-            search(location: $term term: "burrito" sort_by: "distance") {
+          query rootQuery(
+            $latitude: Float,
+            $longitude: Float,
+            $location: String
+          ) {
+            search(
+              location: $location
+              latitude: $latitude
+              longitude: $longitude
+              term: "burrito"
+              sort_by: "distance"
+              limit: 10
+            ) {
               business {
                 ...BusinessList
               }
@@ -37,7 +48,7 @@ class Root extends Component {
           }
         `}
         render={relayThings => <RootPresentation updateSearch={this.updateSearch} {...relayThings}/>}
-        variables={{ term }}
+        variables={{ location, latitude, longitude }}
       />
     )
   }

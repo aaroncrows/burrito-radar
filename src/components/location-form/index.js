@@ -1,13 +1,20 @@
 import React from 'react'
-
+import { locationForm } from './location-form.scss'
 const LocationForm = ({ search }) => (
-  <form className="flex six" onSubmit={e => {
+  <form className={`row ${locationForm}`} onSubmit={e => {
     e.preventDefault()
-    search(e.target.location.value)
+    search({location: e.target.location.value })
   }}>
-    <input className="half" type="text" placeholder="location" name="location" />
-    <button className="off-sixth" type="submit">Submit</button>
-    <button>GPS</button>
+    <input className="eight columns" type="text" placeholder="location" name="location" />
+    <div className="four columns">
+      <button type="submit">Submit</button>
+      <button onClick={e => {
+        e.preventDefault()
+        navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude }}) => {
+          search({ latitude, longitude })
+        })
+      }}>GPS</button>
+    </div>
   </form>
 )
 
