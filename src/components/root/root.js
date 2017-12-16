@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import RootPresentation from './root-presentation'
 import { QueryRenderer, graphql } from 'react-relay'
 
@@ -7,18 +7,40 @@ import './root.scss'
 
 import environment from '../../config/relay-env' 
 
-const Root = () => (<QueryRenderer
-  environment={environment}
-  query={graphql`
-    query rootQuery {
-      business(id: "coava-coffee-roasters-portland-4") {
-        ...BusinessCard
-      }
-
-      ...BusinessList
+class Root extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      term: 'Portland'
     }
-  `}
-  render={RootPresentation}
-/>)
+
+    this.updateSearch = this.updateSearch.bind(this)
+  }
+
+  updateSearch(term) {
+    this.setState({ term })
+  }
+
+  render() {
+    const { term } = this.state
+
+    return (
+      <QueryRenderer
+        environment={environment}
+        query={graphql`
+          query rootQuery($term: String) {
+            search(location: $term term: "burrito" sort_by: "distance") {
+              business {
+                ...BusinessList
+              }
+            }
+          }
+        `}
+        render={relayThings => <RootPresentation updateSearch={this.updateSearch} {...relayThings}/>}
+        variables={{ term }}
+      />
+    )
+  }
+}
 
 export default Root 

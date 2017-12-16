@@ -1,3 +1,5 @@
+require('./scripts/keys')
+
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
@@ -7,22 +9,6 @@ let token
 const { YELP_CLIENT_SECRET: secret, YELP_CLIENT_ID: id } = process.env
 
 app.use(cors())
-
-app.get('/auth', bodyParser.json(), (req, res) => {
-  request.post('https://api.yelp.com/oauth2/token', {
-    form: {
-      client_id: id,
-      client_secret: secret,
-      grant_type: 'client_credentials'
-    }
-  }, (err, r, b) => {
-    if (err) return res.json(err)
-    const body = JSON.parse(b)
-    token = body.access_token
-
-    res.json(r)
-  })
-})
 
 app.post('/graphql', bodyParser.json(), (req, res) => {
   request.post('https://api.yelp.com/oauth2/token', {
@@ -38,9 +24,9 @@ app.post('/graphql', bodyParser.json(), (req, res) => {
     request.post('https://api.yelp.com/v3/graphql', {
       headers: {
         Authorization: `Bearer ${token}`,
-        'content-type': 'application/graphql'
+        'content-type': 'application/json'
       },
-      body: req.body.query
+      body: JSON.stringify(req.body)
     }, (err, r) => {
       if (err) return res.json(err)
       r = JSON.parse(r.body)

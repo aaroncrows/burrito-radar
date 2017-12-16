@@ -1,25 +1,13 @@
-import { graphql, createRefetchContainer } from 'react-relay'
+import { graphql, createFragmentContainer } from 'react-relay'
 
 import BusinessListPresentation from './BusinessListPresentation'
 
-const BusinessList = createRefetchContainer(
+const BusinessList = createFragmentContainer(
   BusinessListPresentation,
-  graphql`fragment BusinessList on Query {
-    search(term: "burrito" latitude: 45.511736 longitude: -122.678801 sort_by: "distance") {
-      business {
-        id
-        ...BusinessCard
-      }
-    }
-  }`,
-  graphql`fragment BusinessList on Query {
-    search(term: "burrito" latitude: 45.511736 longitude: -122.678801 sort_by: "distance") {
-      business {
-        id
-        ...BusinessCard
-      }
-    }
-  
+  graphql`fragment BusinessList on Business
+  @relay (plural: true) {
+    id
+    ...BusinessCard
   }`
 )
 

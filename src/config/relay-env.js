@@ -1,19 +1,9 @@
-const {
+import {
   Environment,
   Network,
   RecordSource,
   Store,
-} = require('relay-runtime')
-
-const sfQuery = `{
-          business(id: "garaje-san-francisco") {
-              name
-              id
-              rating
-              url
-            }
-          }`
-
+} from 'relay-runtime'
 
 const fetchQuery = (operation, variables, cacheConfig, uploadables) =>
   fetch('http://localhost:9292/graphql', {
