@@ -10,6 +10,13 @@ const BusinessCard = createFragmentContainer(
         rating
         url
         photos
+        hours {
+          is_open_now
+          open {
+            start
+            end
+          }
+        }
       }
     `
 )
