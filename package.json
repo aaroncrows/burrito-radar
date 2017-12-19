@@ -4,7 +4,8 @@
   "description": "A Burrito Locator",
   "main": "index.js",
   "scripts": {
-    "start": "node ./scripts/start",
+    "start:dev": "node ./scripts/start",
+    "start:proxy": "nodemon ./proxy-server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "relay": "relay-compiler --src ./src --schema ./data/schema.graphql"
   },

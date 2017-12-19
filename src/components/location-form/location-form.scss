@@ -1,6 +1,11 @@
 :local(.locationForm) {
   button {
-    margin-left: 10px;
-    float: right;
+    width: 47%;
+    float: left;
+    padding-left: 0px;
+    padding-right: 0px;
+    &:first-child {
+      margin-right: 6%;
+    }
   }
 }

@@ -2,6 +2,9 @@ const { YELP_CLIENT_SECRET: secret, YELP_CLIENT_ID: id } = process.env
 const request = require('request')
 
 module.exports = {
+  stats: {
+    colors: true
+  },
   proxy: {
     '/yelp': {
       target: 'https://api.yelp.com/v3/graphql',

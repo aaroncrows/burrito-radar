@@ -9,6 +9,7 @@ const BusinessCard = createFragmentContainer(
         name
         rating
         url
+        photos
       }
     `
 )
