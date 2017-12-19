@@ -15,7 +15,8 @@
   "babel": {
     "presets": [
       "env",
-      "react"
+      "react",
+      "stage-2"
     ],
     "plugins": [
       "relay"
@@ -29,6 +30,7 @@
     "babel-plugin-relay": "^1.4.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "cors": "^2.8.4",
     "css-loader": "^0.28.7",
     "express": "^4.16.2",

@@ -1,4 +1,7 @@
 :local(.locationForm) {
+  input[type=text] {
+    width: 100%;
+  }
   button {
     width: 47%;
     float: left;
@@ -6,6 +9,14 @@
     padding-right: 0px;
     &:first-child {
       margin-right: 6%;
+    }
+  }
+
+  .error {
+    border-color: red;
+
+    &+span {
+      color: red;
     }
   }
 }

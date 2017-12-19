@@ -1,22 +1,47 @@
-import React from 'react'
+import React, { Component }  from 'react'
 import { locationForm } from './location-form.scss'
 
-const LocationForm = ({ search }) => (
-  <form className={`row ${locationForm}`} onSubmit={e => {
+class LocationForm extends Component {
+  state = {
+    formError: false
+  }
+
+  _handleSubmit = e => {
+    const { value: location } = e.target.location
+    const { search } = this.props
+
     e.preventDefault()
-    search({location: e.target.location.value })
-  }}>
-    <input className="seven columns" type="text" placeholder="location" name="location" />
-    <div className="five columns">
-      <button type="submit">Submit</button>
-      <button onClick={e => {
-        e.preventDefault()
-        navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude }}) => {
-          search({ latitude, longitude })
-        })
-      }}>GPS</button>
-    </div>
-  </form>
-)
+    e.target.location.value = ''
+    this.setState({ formError: false })
+
+    if (!location) return this.setState({ formError: true })
+    search({ location })
+  }
+
+  _handleClick = e => {
+    e.preventDefault()
+
+    const { search } = this.props
+    navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude }}) => {
+      search({ latitude, longitude })
+    })
+  }
+  render() {
+    const { formError } = this.state
+
+    return (
+      <form className={`row ${locationForm}`} onSubmit={this._handleSubmit}>
+        <div className="seven columns">
+          <input className={formError ? 'error' : ''} type="text" placeholder="location" name="location" />
+          {formError ? <span>Please enter a location</span> : null}
+        </div>
+        <div className="five columns">
+          <button type="submit">Submit</button>
+          <button onClick={this._handleClick}>GPS</button>
+        </div>
+      </form>
+    )
+  }
+}
 
 export default LocationForm
