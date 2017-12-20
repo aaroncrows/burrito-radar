@@ -8,17 +8,18 @@ import './root.scss'
 import environment from '../../config/relay-env' 
 
 class Root extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      location: 'Portland'
-    }
-
-    this.updateSearch = this.updateSearch.bind(this)
+  state = {
+    location: 'Portland'
   }
 
-  updateSearch({ location, latitude, longitude }) {
+  updateSearch = ({ location, latitude, longitude }) => {
     this.setState({ location, latitude, longitude })
+  }
+
+  currentLocation = () => {
+    const { location, latitude, longitude } = this.state
+
+    return { location, latitude, longitude }
   }
 
   render() {
@@ -47,7 +48,14 @@ class Root extends Component {
             }
           }
         `}
-        render={relayThings => <RootPresentation updateSearch={this.updateSearch} {...relayThings}/>}
+        render={
+          relayThings => 
+            <RootPresentation
+              updateSearch={this.updateSearch}
+              currentLocation={this.currentLocation}
+              {...relayThings}
+            />
+        }
         variables={{ location, latitude, longitude }}
       />
     )

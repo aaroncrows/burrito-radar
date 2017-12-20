@@ -36,5 +36,5 @@ app.post('/graphql', bodyParser.json(), (req, res) => {
   })
 })
 
-app.listen(9292, () => console.log('stupid proxy up on 9292'))
+app.listen(9292, () => console.log('proxy up on 9292'))
 
