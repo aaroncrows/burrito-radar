@@ -15,16 +15,13 @@ class LocationForm extends Component {
     this.setState({ formError: false })
 
     if (!location) return this.setState({ formError: true })
-    search({ location })
+    search(location)
   }
 
   _handleClick = e => {
     e.preventDefault()
 
-    const { search } = this.props
-    navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude }}) => {
-      search({ latitude, longitude })
-    })
+    this.props.search()
   }
   render() {
     const { formError } = this.state
