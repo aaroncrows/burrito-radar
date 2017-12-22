@@ -16,7 +16,7 @@ const plugins = [
 
 
 module.exports = {
-  entry: [path.resolve(__dirname, '../src/app.js')],
+  entry: [path.resolve(__dirname, './polyfills.js'), path.resolve(__dirname, '../src/app.js')],
   output: {
     path: path.resolve(__dirname, '../build'),
     filename: 'bundle.js'

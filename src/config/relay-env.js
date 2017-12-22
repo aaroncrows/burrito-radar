@@ -6,7 +6,7 @@ import {
 } from 'relay-runtime'
 
 const fetchQuery = (operation, variables, cacheConfig, uploadables) =>
-  fetch('http://localhost:9292/graphql', {
+  fetch('/graphql', {
     method: 'POST',
     headers: {
       'content-type': 'application/json'

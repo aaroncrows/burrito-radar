@@ -10,7 +10,8 @@ import environment from '../../config/relay-env'
 class Root extends Component {
   state = {
     location: 'Portland',
-    fetching: false
+    fetching: false,
+    locationError: false
   }
 
   setFetching = fetching => {
@@ -18,13 +19,17 @@ class Root extends Component {
   }
 
   updateSearch = location => {
+    this.setState({ locationError: false })
     if (location) return this.setState({ location, latitude: undefined, longitude: undefined })
     // the geolocation needs to set off the loading state there should be a
     // better way to handle this
-    this.setFetching(true)
+
+    this.setState({ fetching: true })
     navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude }}) => {
       // use this rather than the method so two renders aren't triggered
       this.setState({ latitude, longitude, location: undefined, fetching: false })
+    }, err => {
+      this.setState({ locationError: true, fetching: false })
     })
   }
 
@@ -67,6 +72,7 @@ class Root extends Component {
               updateSearch={this.updateSearch}
               currentLocation={this.currentLocation}
               isFetching={this.state.fetching}
+              locationError={this.state.locationError}
               {...relayThings}
             />
         }

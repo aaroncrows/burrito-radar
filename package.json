@@ -4,9 +4,9 @@
   "description": "A Burrito Locator",
   "main": "index.js",
   "scripts": {
-    "start": "run-p start:dev start:proxy",
-    "start:dev": "node ./scripts/start",
-    "start:proxy": "nodemon ./proxy-server.js",
+    "start": "npm run relay && node ./scripts/start-production",
+    "start:dev": "node ./scripts/start-dev",
+    "build": "node ./scripts/build-production",
     "test": "echo \"Error: no test specified\" && exit 1",
     "relay": "relay-compiler --src ./src --schema ./data/schema.graphql"
   },
@@ -54,6 +54,7 @@
     "skeleton-css": "^2.0.4",
     "style-loader": "^0.19.0",
     "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.9.6"
+    "webpack-dev-server": "^2.9.6",
+    "whatwg-fetch": "^2.0.3"
   }
 }

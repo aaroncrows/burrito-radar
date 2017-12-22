@@ -4,11 +4,13 @@ const bodyParser = require('body-parser')
 const request = require('request')
 const cors = require('cors')
 
-// load keys locally for development
-require('./scripts/keys')
-
+const { PORT = 9292, NODE_ENV } = process.env
 app.use(cors())
-app.use(express.static('./build'))
+
+// Don't use as static server other than production
+// dev server should be used
+if (NODE_ENV === 'production') app.use(express.static('./build'))
+
 app.post('/graphql', bodyParser.json(), (req, res) => {
   const token = process.env.API_KEY
 
@@ -26,5 +28,5 @@ app.post('/graphql', bodyParser.json(), (req, res) => {
   })
 })
 
-app.listen(9292, () => console.log('proxy up on 9292'))
+app.listen(PORT, () => console.log(`up on ${PORT}`))
 
