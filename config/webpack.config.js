@@ -1,9 +1,17 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const path = require('path')
 const autoprefixer = require('autoprefixer')
 
 const plugins = [
-  new HtmlWebpackPlugin({ template: path.resolve(__dirname, '../src/index.html')})
+  new HtmlWebpackPlugin({ template: path.resolve(__dirname, '../src/index.html')}),
+  new FaviconsWebpackPlugin({
+    logo: path.resolve(__dirname, '../src/burrito.png'),
+    icons: {
+      appleStartup: false,
+      appleIcon: false
+    }
+  })
 ]
 
 
