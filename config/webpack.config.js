@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const path = require('path')
 const autoprefixer = require('autoprefixer')
 
@@ -7,13 +8,18 @@ const plugins = [
   new HtmlWebpackPlugin({ template: path.resolve(__dirname, '../src/index.html')}),
   new FaviconsWebpackPlugin({
     logo: path.resolve(__dirname, '../src/burrito.png'),
+    persistentCache: false,
     icons: {
       appleStartup: false,
-      appleIcon: false
+      appleIcon: false,
+      android: false
     }
   })
 ]
 
+if (process.env.NODE_ENV === 'production') {
+  plugins.push(new UglifyJSPlugin())
+}
 
 module.exports = {
   entry: [path.resolve(__dirname, './polyfills.js'), path.resolve(__dirname, '../src/app.js')],

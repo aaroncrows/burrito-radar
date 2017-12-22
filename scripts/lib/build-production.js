@@ -1,8 +1,9 @@
 const webpack = require('webpack')
-const webpackConfig = require('../../config/webpack.config.js')
 
 const buildProduction = fn => {
   process.env.NODE_ENV = 'production'
+
+  const webpackConfig = require('../../config/webpack.config.js')
 
   webpack(webpackConfig).run((err, stats) => {
     if (err) {

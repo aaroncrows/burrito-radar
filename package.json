@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A Burrito Locator",
   "main": "index.js",
+  "repository": "https://github.com/aaroncrows/burrito-radar",
   "scripts": {
     "start": "npm run relay && node ./scripts/start-production",
     "start:dev": "node ./scripts/start-dev",
@@ -53,6 +54,7 @@
     "sass-loader": "^6.0.6",
     "skeleton-css": "^2.0.4",
     "style-loader": "^0.19.0",
+    "uglifyjs-webpack-plugin": "^1.1.4",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.6",
     "whatwg-fetch": "^2.0.3"
