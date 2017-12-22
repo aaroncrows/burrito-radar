@@ -33,8 +33,8 @@ class LocationForm extends Component {
           {formError ? <span>Please enter a location</span> : null}
         </div>
         <div className="five columns">
-          <button type="submit">Submit</button>
-          <button onClick={this._handleClick}>GPS</button>
+          <button type="submit">Search</button>
+          <button onClick={this._handleClick}>Near Me</button>
         </div>
       </form>
     )
