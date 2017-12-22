@@ -1,5 +1,5 @@
 {
-  "name": "burrito-locator",
+  "name": "burrito-radar",
   "version": "1.0.0",
   "description": "A Burrito Locator",
   "main": "index.js",
@@ -11,7 +11,7 @@
     "relay": "relay-compiler --src ./src --schema ./data/schema.graphql"
   },
   "keywords": [],
-  "author": "",
+  "author": "Aaron Krause <aaronjkrause@gmail.com>",
   "license": "ISC",
   "babel": {
     "presets": [
