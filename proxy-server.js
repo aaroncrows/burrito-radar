@@ -8,7 +8,7 @@ const cors = require('cors')
 require('./scripts/keys')
 
 app.use(cors())
-
+app.use(express.static('./build'))
 app.post('/graphql', bodyParser.json(), (req, res) => {
   const token = process.env.API_KEY
 
